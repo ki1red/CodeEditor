@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using Lab_1.ViewInterfaces;
 using Lab_1;
 using Lab_1.AuxiliaryClasses;
+using System.Diagnostics;
+using System.Security.Policy;
 
 namespace Lab_1
 {
@@ -31,6 +33,7 @@ namespace Lab_1
             InitializeTabEdit();
             InitializeKeysInCodeEditor();
             InitializeTabFile();
+            InitializeTabHelp();
         }
 
         private void InitializeTabFile()
@@ -171,10 +174,31 @@ namespace Lab_1
 
             MENUITEM_SelectAllText.Click += MENUITEM_SelectAllText_Click;
         }
+        private void InitializeTabHelp()
+        {
+            void MENUITEM_Help_Click(object sender, RoutedEventArgs e)
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "https://github.com/ki1red/CodeEditor",
+                    UseShellExecute = true
+                });
+            }
+
+            MENUITEM_Help.Click += MENUITEM_Help_Click;
+
+            void MENUITEM_About_Click(object sender, RoutedEventArgs e)
+            {
+                MessageBox.Show("v 1.0", "Info");
+            }
+
+            MENUITEM_About.Click += MENUITEM_About_Click;
+        }
         private void InitializeKeysInCodeEditor()
         {
             void TEXTBOX_WindowCodeEditor_PreviewKeyDown(object sender, KeyEventArgs e)
             {
+                bool isClose;
                 bool isEdit = false;
                 if (Keyboard.Modifiers != ModifierKeys.Control)
                 {

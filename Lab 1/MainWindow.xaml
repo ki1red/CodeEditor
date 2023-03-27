@@ -43,8 +43,8 @@
             </MenuItem>
             <MenuItem Header="Run"/>
             <MenuItem Header="Help">
-                <MenuItem Header="Help"/>
-                <MenuItem Header="About"/>
+                <MenuItem Header="Help" Name="MENUITEM_Help"/>
+                <MenuItem Header="About" Name="MENUITEM_About"/>
             </MenuItem>
         </Menu>
 
