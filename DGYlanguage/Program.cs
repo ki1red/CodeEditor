@@ -1,11 +1,14 @@
 ﻿int countArgs = args.Length;
 
-int indexTextCode;
-if (countArgs > 1)
-    indexTextCode = 1;
-else
-    indexTextCode = 0;
+if (countArgs <= 1)
+    throw new Exception("Not flags");
 
-string result = ExpressionEvaluator.Analize(args[indexTextCode]);
+string result;
+if (args[0] == "c")
+    result = ExpressionEvaluator.Analize(args[1]);
+else if (args[0] == "g")
+    result = ExpressionEvaluator.GetData(args[1]);
+else
+    result = "";
 
 Console.WriteLine(result);

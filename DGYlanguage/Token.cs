@@ -136,7 +136,7 @@ class ExpressionEvaluator
                 {
                     j++;
                 }
-   
+
                 string identifier = inputLine.Substring(i, j - i);
 
                 if (ObjectTypesNames().Contains(identifier))
@@ -155,7 +155,7 @@ class ExpressionEvaluator
                     {
                         tokens.Add(variableInList);
                     }
-                    
+
                     tokens.Add(new Variable(identifier, typeVariable, TokenType.IDENTIFIER));
                     isVariableInit = true;
                 }
@@ -269,11 +269,11 @@ class ExpressionEvaluator
         return stack.Pop();
     }
 
-    private static void InitVariable(List<Token> tokens,out Variable variable)
+    private static void InitVariable(List<Token> tokens, out Variable variable)
     {
         variable = GetVariableOrNull(tokens);
 
-        if(variable == null)
+        if (variable == null)
             return;
 
         tokens.Remove(variable);
@@ -283,17 +283,17 @@ class ExpressionEvaluator
         variable.Value = result.ToString();
     }
 
-    private static Variable GetVariableOrNull(List<Token> tokens) 
+    private static Variable GetVariableOrNull(List<Token> tokens)
     {
         Variable variable = null;
         bool isFindFlag = false;
         int index = 0;
-        
+
         foreach (Token t in tokens)
         {
             if (t is Variable && t.Value == "null")
             {
-                if (tokens.First().Type != TokenType.TYPE && tokens[1].Type != TokenType.IDENTIFIER) 
+                if (tokens.First().Type != TokenType.TYPE && tokens[1].Type != TokenType.IDENTIFIER)
                     throw new Exception("Bad Tokens.");
 
                 if (tokens[index + 1].Value == "=" && tokens[index + 1].Type == TokenType.SET && isFindFlag == false)
@@ -309,7 +309,7 @@ class ExpressionEvaluator
         return variable;
     }
 
-    public static string Analize(string line) 
+    public static string Analize(string line)
     {
         List<Token> tokens = Tokenize(line);
         Variable variable;
@@ -324,5 +324,21 @@ class ExpressionEvaluator
         {
             return Evaluate(InfixToRPN(tokens)).ToString();
         }
+    }
+
+    public static string GetData(string line)
+    {
+        string data = "";
+        string[] lines = line.Split(';');
+        foreach (string _line in lines)
+        {
+            List<Token> tokens = Tokenize(_line);
+            foreach (Token token in tokens)
+            {
+                data += $"{token.Value} {token.Type}\n";
+            }
+        }
+        data += '\b';
+        return data;
     }
 }

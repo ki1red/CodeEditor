@@ -38,7 +38,8 @@ namespace Lab_1
             InitializeTabHelp();
             InitializeTabRun();
 
-            connector = new LanguageConnector("C:\\Users\\druzh\\source\\repos\\CodeEditor\\DGYlanguage\\bin\\Debug\\net6.0\\DGYlanguage.exe");
+            connector = new LanguageConnector("C:\\Users\\druzh\\source\\repos\\CodeEditor\\DGYlanguage\\bin\\Debug\\net6.0\\DGYlanguage.exe",
+                "C:\\Users\\druzh\\source\\repos\\CodeEditor\\DGYlanguage\\bin\\Debug\\net6.0\\colors.txt");
         }
 
         private void InitializeTabFile()
@@ -194,7 +195,7 @@ namespace Lab_1
 
             void MENUITEM_About_Click(object sender, RoutedEventArgs e)
             {
-                MessageBox.Show("v 1.0", "Info");
+                MessageBox.Show("v 1.2", "Info");
             }
 
             MENUITEM_About.Click += MENUITEM_About_Click;

@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AuxiliaryClasses\Colorizer.cs" />
     <Compile Include="AuxiliaryClasses\CommanderActionsForCode.cs" />
     <Compile Include="AuxiliaryClasses\FileWorker.cs" />
     <Compile Include="LanguageConnect\ICaller.cs" />
