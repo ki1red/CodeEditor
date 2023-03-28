@@ -17,13 +17,15 @@ using Lab_1;
 using Lab_1.AuxiliaryClasses;
 using System.Diagnostics;
 using System.Security.Policy;
+using Lab_1.LanguageConnect;
 
 namespace Lab_1
 {
-    public partial class MainWindow : Window//, IRunable
+    public partial class MainWindow : Window, IRunable
     {
         private bool isFileSaved = true;
         private CommanderActionsForCode commanderActions = null;
+        private LanguageConnector connector;
 
         public MainWindow()
         {
@@ -34,6 +36,9 @@ namespace Lab_1
             InitializeKeysInCodeEditor();
             InitializeTabFile();
             InitializeTabHelp();
+            InitializeTabRun();
+
+            connector = new LanguageConnector("C:\\Users\\druzh\\source\\repos\\CodeEditor\\DGYlanguage\\bin\\Debug\\net6.0\\DGYlanguage.exe");
         }
 
         private void InitializeTabFile()
@@ -194,6 +199,16 @@ namespace Lab_1
 
             MENUITEM_About.Click += MENUITEM_About_Click;
         }
+        private void InitializeTabRun()
+        {
+            void MENUITEM_Run_Click(object sender, RoutedEventArgs e)
+            {
+                this.Run();
+            }
+
+            MENUITEM_Run.Click += MENUITEM_Run_Click;
+        }
+
         private void InitializeKeysInCodeEditor()
         {
             void TEXTBOX_WindowCodeEditor_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -209,7 +224,7 @@ namespace Lab_1
                             isEdit = true;
                             break;
                         case Key.Back:
-                            commanderActions.DeleteAction();
+                            commanderActions.BackspaceAction();
                             isEdit = true;
                             break;
                         default:
@@ -289,16 +304,13 @@ namespace Lab_1
             }
             return isClose;
         }
-         /*
-public void Run()
-{
-  var line = CodeTextBox.Text.Split(';');
-  this.ResultMessages.Text = ExpressionEvaluator.Analize(line[0]);
-}
+         
+        public void Run()
+        {
+            connector.UpdateTextCode(TEXTBOX_WindowCodeEditor.Text);
 
-private void RunItemMenuClick(object sender, RoutedEventArgs e) {
-  this.Run();
-}
-*/
+            TEXTBOX_WindowOutputerInformation.Text = connector.GetResultCompileCode();
+        }
+
     }
 }

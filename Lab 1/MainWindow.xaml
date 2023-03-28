@@ -41,7 +41,7 @@
                 <MenuItem Header="Bibliography"/>
                 <MenuItem Header="Source Code"/>
             </MenuItem>
-            <MenuItem Header="Run"/>
+            <MenuItem Header="Run" Name="MENUITEM_Run"/>
             <MenuItem Header="Help">
                 <MenuItem Header="Help" Name="MENUITEM_Help"/>
                 <MenuItem Header="About" Name="MENUITEM_About"/>

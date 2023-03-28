@@ -57,7 +57,8 @@
     </ApplicationDefinition>
     <Compile Include="AuxiliaryClasses\CommanderActionsForCode.cs" />
     <Compile Include="AuxiliaryClasses\FileWorker.cs" />
-    <Compile Include="Exceptions\AnalizerExceptions.cs" />
+    <Compile Include="LanguageConnect\ICaller.cs" />
+    <Compile Include="LanguageConnect\LanguageConnector.cs" />
     <Compile Include="ViewInterfaces\IActionsOnCode.cs" />
     <Compile Include="ViewInterfaces\IActionsOnStack.cs" />
     <Compile Include="ViewInterfaces\IFileHandler.cs" />
@@ -76,7 +77,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

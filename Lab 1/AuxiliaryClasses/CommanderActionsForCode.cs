@@ -36,12 +36,16 @@ namespace Lab_1.AuxiliaryClasses
         {
             if (undoStack.Count > 0)
             {
+                int positionCursorInString = textBox.CaretIndex;
+
                 var lastState = undoStack.Pop();
                 textBox.TextChanged -= OnTextChanged;
                 redoStack.Push(textBox.Text);
                 textBox.Text = lastState;
                 textBox.TextChanged += OnTextChanged;
                 previousText = textBox.Text;
+
+                textBox.CaretIndex = positionCursorInString;
             }
         }
 
@@ -49,12 +53,16 @@ namespace Lab_1.AuxiliaryClasses
         {
             if (redoStack.Count > 0)
             {
+                int positionCursorInString = textBox.CaretIndex;
+
                 var nextState = redoStack.Pop();
                 textBox.TextChanged -= OnTextChanged;
                 undoStack.Push(textBox.Text);
                 textBox.Text = nextState;
                 textBox.TextChanged += OnTextChanged;
                 previousText = textBox.Text;
+
+                textBox.CaretIndex = positionCursorInString;
             }
         }
 
@@ -83,6 +91,42 @@ namespace Lab_1.AuxiliaryClasses
                 undoStack.Push(textBox.Text);
                 redoStack.Clear();
                 textBox.SelectedText = "";
+            }
+            else if (textBox.CaretIndex != textBox.Text.Length)
+            {
+                undoStack.Push(textBox.Text);
+                redoStack.Clear();
+
+
+                int positionCursorInString = textBox.CaretIndex;
+                int indexTheElement = positionCursorInString;
+                string originalString = textBox.Text;
+
+                textBox.Text = originalString.Remove(indexTheElement, 1);
+                textBox.CaretIndex = positionCursorInString;
+            }
+        }
+
+        public void BackspaceAction()
+        {
+            if (textBox.SelectionLength > 0)
+            {
+                undoStack.Push(textBox.Text);
+                redoStack.Clear();
+                textBox.SelectedText = "";
+            }
+            else if (textBox.CaretIndex != 0)
+            {
+                undoStack.Push(textBox.Text);
+                redoStack.Clear();
+
+
+                int positionCursorInString = textBox.CaretIndex;
+                int indexTheElement = positionCursorInString - 1;
+                string originalString = textBox.Text;
+
+                textBox.Text = originalString.Remove(indexTheElement, 1);
+                textBox.CaretIndex = positionCursorInString - 1;
             }
         }
 
