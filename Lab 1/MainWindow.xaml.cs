@@ -195,7 +195,7 @@ namespace Lab_1
 
             void MENUITEM_About_Click(object sender, RoutedEventArgs e)
             {
-                MessageBox.Show("v 1.2", "Info");
+                MessageBox.Show("v 1.3", "Info");
             }
 
             MENUITEM_About.Click += MENUITEM_About_Click;

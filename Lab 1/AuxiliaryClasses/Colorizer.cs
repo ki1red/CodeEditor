@@ -14,7 +14,7 @@ namespace Lab_1.AuxiliaryClasses
         public static void ColorizeCode(ref TextBox textBox, Dictionary<string, Color> dictReplace)
         {
             RichTextBox richTextBox = new RichTextBox();
-            //richTextBox.
+            //richTextBox.Doce
         }
     }
 }
