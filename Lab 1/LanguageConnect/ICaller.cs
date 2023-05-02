@@ -10,6 +10,6 @@ namespace Lab_1.LanguageConnect
     internal interface ICaller
     {
         string GetResultCompileCode();
-        Dictionary<string, Color> GetColorsForCode();
+        //Dictionary<string, Color> GetColorsForCode();
     }
 }

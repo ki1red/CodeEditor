@@ -38,8 +38,7 @@ namespace Lab_1
             InitializeTabHelp();
             InitializeTabRun();
 
-            connector = new LanguageConnector("C:\\Users\\druzh\\source\\repos\\CodeEditor\\DGYlanguage\\bin\\Debug\\net6.0\\DGYlanguage.exe",
-                "C:\\Users\\druzh\\source\\repos\\CodeEditor\\DGYlanguage\\bin\\Debug\\net6.0\\colors.txt");
+            connector = new LanguageConnector("C:\\Users\\druzh\\source\\repos\\CodeEditor\\DGYlanguage\\bin\\Debug\\net6.0\\DGYlanguage.exe");
         }
 
         private void InitializeTabFile()
@@ -124,7 +123,7 @@ namespace Lab_1
         private void InitializeTabEdit()
         {
             //if (commanderActions == null)
-            //    throw new Exception("Commander isn't init");
+            //    throw new Exception("Commander isn't init"); 
 
             void MENUITEM_UndoAction_Click(object sender, RoutedEventArgs e)
             {
@@ -214,7 +213,6 @@ namespace Lab_1
         {
             void TEXTBOX_WindowCodeEditor_PreviewKeyDown(object sender, KeyEventArgs e)
             {
-                bool isClose;
                 bool isEdit = false;
                 if (Keyboard.Modifiers != ModifierKeys.Control)
                 {
@@ -272,6 +270,8 @@ namespace Lab_1
                     isFileSaved = false;
                     e.Handled = true;
                 }
+
+                //connector.UpdateTextCode(TEXTBOX_WindowCodeEditor.Text);
             }
 
             TEXTBOX_WindowCodeEditor.PreviewKeyDown += TEXTBOX_WindowCodeEditor_PreviewKeyDown;

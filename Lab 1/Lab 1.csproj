@@ -55,12 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AuxiliaryClasses\ColoredTextBox.cs" />
-    <Compile Include="AuxiliaryClasses\Colorizer.cs" />
     <Compile Include="AuxiliaryClasses\CommanderActionsForCode.cs" />
     <Compile Include="AuxiliaryClasses\FileWorker.cs" />
     <Compile Include="LanguageConnect\ICaller.cs" />
     <Compile Include="LanguageConnect\LanguageConnector.cs" />
+    <Compile Include="TextInMomentTime.cs" />
     <Compile Include="ViewInterfaces\IActionsOnCode.cs" />
     <Compile Include="ViewInterfaces\IActionsOnStack.cs" />
     <Compile Include="ViewInterfaces\IFileHandler.cs" />

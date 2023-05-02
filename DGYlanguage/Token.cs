@@ -328,6 +328,9 @@ class ExpressionEvaluator
 
     public static string GetData(string line)
     {
+        if (line == null || line == "")
+            return "";
+
         string data = "";
         string[] lines = line.Split(';');
         foreach (string _line in lines)

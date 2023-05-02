@@ -15,12 +15,12 @@ namespace Lab_1.LanguageConnect
         private string textCode;
         private string pathToApp;
         private static Dictionary<string, char> flags = new Dictionary<string, char> { {"chech errors",'e'},{"compile and read",'c'},{"get golors for code",'g'} };
-        private static string pathToColors;
+        //private static string pathToColors;
 
-        public LanguageConnector(string pathToCompilerApp, string pathToColorsFile)
+        public LanguageConnector(string pathToCompilerApp)
         {
             this.pathToApp = pathToCompilerApp;
-            pathToColors = pathToColorsFile;
+            //pathToColors = pathToColorsFile;
 
             process = new Process();
         }
@@ -37,29 +37,31 @@ namespace Lab_1.LanguageConnect
             return result;
         }
 
-        public Dictionary<string, Color> GetColorsForCode()
-        {
-            SetSettingsForProcess();
-            process.StartInfo.Arguments = $"{flags["get golors for code"]} \"{textCode}\"";
-            process.Start();
-            string result = process.StandardOutput.ReadToEnd();
+        //public Dictionary<string, Color> GetColorsForCode()
+        //{
+        //    SetSettingsForProcess();
+        //    process.StartInfo.Arguments = $"{flags["get golors for code"]} \"{textCode}\"";
+        //    process.Start();
+        //    string result = process.StandardOutput.ReadToEnd();
+        //    process.WaitForExit();
 
-            process.WaitForExit();
+        //    Dictionary<string, string> nameAndType = GetNamesAndTypes(result);
 
-            Dictionary<string, string> nameAndType = GetNamesAndTypes(result);
+        //    if (nameAndType == null)
+        //        return null;
 
-            string colors = File.ReadAllText(pathToColors);
-            Dictionary<string, Color> typeAndColor = GetTypesAndColors(colors);
+        //    string colors = File.ReadAllText(pathToColors);
+        //    Dictionary<string, Color> typeAndColor = GetTypesAndColors(colors);
 
-            Dictionary<string, Color> nameAndColor = new Dictionary<string, Color>();
-            foreach (string name in nameAndType.Keys)
-            {
-                string type = nameAndType[name];
-                Color color = typeAndColor[type];
-                nameAndColor.Add(name, color);
-            }
-            return nameAndColor;
-        }
+        //    Dictionary<string, Color> nameAndColor = new Dictionary<string, Color>();
+        //    foreach (string name in nameAndType.Keys)
+        //    {
+        //        string type = nameAndType[name];
+        //        Color color = typeAndColor[type];
+        //        nameAndColor.Add(name, color);
+        //    }
+        //    return nameAndColor;
+        //}
 
         public void UpdateTextCode(string textCodeFromCodeEditor)
         {
@@ -88,6 +90,9 @@ namespace Lab_1.LanguageConnect
         }
         private Dictionary<string, string> GetNamesAndTypes(string textFromApp)
         {
+            textFromApp = textFromApp.Replace("\r\n", string.Empty);
+            if (textFromApp.Length == 0) return null;
+
             Dictionary<string, string> nameAndType = new Dictionary<string, string>();
 
             string[] lines = textFromApp.Split('\n');

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:primitives="clr-namespace:System.Windows.Controls.Primitives;assembly=PresentationFramework"
-        xmlns:local="clr-namespace:Lab_1"
+        xmlns:local="clr-namespace:Lab_1.AuxiliaryClasses"
         mc:Ignorable="d"
         Title="Code editor" Height="516" Width="650"
          Background="White">
@@ -61,7 +61,7 @@
 
             <!-- Раздел для написания кода -->
             <TextBox Name="TEXTBOX_WindowCodeEditor" Grid.Row="0" AcceptsReturn="True" AcceptsTab="True" 
-                     TextWrapping="Wrap" HorizontalScrollBarVisibility="Auto" 
+                     HorizontalScrollBarVisibility="Auto" 
                      VerticalScrollBarVisibility="Auto" FontFamily="Consolas" FontSize="14"/>
 
             <!-- Раздел для отображения ошибок -->
