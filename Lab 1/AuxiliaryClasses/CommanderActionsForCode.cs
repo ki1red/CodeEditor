@@ -147,11 +147,7 @@
 
 //}
 using Lab_1.ViewInterfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace Lab_1.AuxiliaryClasses
@@ -195,8 +191,6 @@ namespace Lab_1.AuxiliaryClasses
                 textBox.CaretIndex = lastState.CursorPosition;
                 textBox.TextChanged += OnTextChanged;
                 previousText = textInMomentTime;
-
-                //textBox.CaretIndex = positionCursorInString;
             }
         }
 
@@ -214,8 +208,6 @@ namespace Lab_1.AuxiliaryClasses
                 textBox.CaretIndex = nextState.CursorPosition;
                 textBox.TextChanged += OnTextChanged;
                 previousText = textInMomentTime;
-
-                //textBox.CaretIndex = positionCursorInString;
             }
         }
 
@@ -270,7 +262,6 @@ namespace Lab_1.AuxiliaryClasses
                 TextInMomentTime textInMomentTime = new TextInMomentTime(textBox.Text, textBox.CaretIndex);
                 undoStack.Push(textInMomentTime);
                 redoStack.Clear();
-                RichTextBox t = new RichTextBox();
 
                 textBox.SelectedText = "";
             }

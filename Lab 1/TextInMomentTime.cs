@@ -30,5 +30,20 @@ namespace Lab_1
         {
             return !(firstText == secondText);
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is TextInMomentTime time &&
+                   Text == time.Text &&
+                   CursorPosition == time.CursorPosition;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 75633146;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(Text);
+            hashCode = hashCode * -1521134295 + CursorPosition.GetHashCode();
+            return hashCode;
+        }
     }
 }

@@ -1,14 +1,28 @@
 ﻿int countArgs = args.Length;
-
-if (countArgs <= 1)
-    throw new Exception("Not flags");
-
 string result;
-if (args[0] == "c")
-    result = ExpressionEvaluator.Analize(args[1]);
-else if (args[0] == "g")
-    result = ExpressionEvaluator.GetData(args[1]);
+if (countArgs <= 1)
+    result = "not flags";
+else if (args[1].IndexOf(".dgy") == -1|| !File.Exists(args[1]))
+    result = "file not found";
+else if (args[0] == "-c")
+{
+    try
+    {
+        CodeParser codeParser = new CodeParser(args[1]);
+
+        result = codeParser.Result;
+    }
+    catch (Exception e)
+    {
+        result = e.Message;
+    }
+}
 else
-    result = "";
+{
+    result = "wtf";
+}
 
 Console.WriteLine(result);
+
+// FLAGS:
+// -c - compile the code (example: dgy.exe test.dgy -c)
