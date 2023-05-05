@@ -1,5 +1,6 @@
 ﻿public class CodeParser
 {
+    private Dictionary<string, object> values = new Dictionary<string, object>();
     public string Text { get; private set; }
     public List<string> Lines { get; private set; }
     public string Result { get; private set; }
@@ -7,8 +8,25 @@
     {
         Text = File.ReadAllText(file);
         Lines = new List<string>();
-        Lines = Utils.SplitTextIntoLines(Text);
-        Result = Utils.ToGlue(Lines);
+        Result = "";
     }
-
+    public void Analize()
+    {
+        Lines = Utils.SplitTextIntoLines(Text);
+        if ((Utils.CheckParens('{', '}', Lines).Count > 0) || (Utils.CheckParens('(', ')', Lines).Count > 0))
+            Result = "eror parens";
+        else
+        {
+            List<List<string>> stringer = new List<List<string>>();
+            int c = 0;
+            while (c < Lines.Count)
+            {
+                stringer.Add(new List<string>());
+                List<Position> positions = Utils.GetPositionsWords(Lines[c], (uint)c);
+                stringer[c] = Utils.SplitTextIntoWords(Lines[c]);
+                List<Token> tokens = Utils.GetTokens(stringer[c], positions, ref values);
+                c++;
+            }
+        }
+    }
 }

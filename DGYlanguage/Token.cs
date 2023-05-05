@@ -18,7 +18,8 @@
     MultiLineComment,       // многострочный комментарий (/* */)
     IfKeyword,              // ключевое слово if
     ElseKeyword,            // ключевое слово else
-    BlockCode,              // {....}
+    LeftBlockCode,          // {
+    RightBlockCode,         // }
     Unknown
 }
 

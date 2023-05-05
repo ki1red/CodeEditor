@@ -3,7 +3,6 @@ public static class Utils
 {
     public static readonly Dictionary<string, TokenType> TokenTypes = new Dictionary<string, TokenType>
     {
-        {"int", TokenType.Int},
         {"+", TokenType.Plus},
         {"-", TokenType.Minus},
         {"*", TokenType.Multiplication},
@@ -19,8 +18,8 @@ public static class Utils
         {"%=", TokenType.CompoundModulo},
         {"/*", TokenType.MultiLineComment},
         {"*/", TokenType.MultiLineComment},
-        {"{", TokenType.BlockCode},
-        {"}", TokenType.BlockCode},
+        {"{", TokenType.LeftBlockCode},
+        {"}", TokenType.RightBlockCode},
         {"if", TokenType.IfKeyword},
         {"else", TokenType.ElseKeyword}
     };
@@ -159,7 +158,7 @@ public static class Utils
 
         return result;
     }
-    public static List<Position> GetPositionsWords(string input, uint numberLine)
+    public static List<Position> GetPositionsWords(string inputLine, uint numberLine)
     {
         const char leftBrace = '{';
         const char rightBrace = '}';
@@ -168,9 +167,9 @@ public static class Utils
         var positions = new List<Position>();
         bool insideBraces = false;
 
-        for (int i = 0, wordStart = 0; i <= input.Length; i++)
+        for (int i = 0, wordStart = 0; i <= inputLine.Length; i++)
         {
-            char c = i == input.Length ? space : input[i];
+            char c = i == inputLine.Length ? space : inputLine[i];
 
             if (c == leftBrace)
             {
@@ -197,36 +196,54 @@ public static class Utils
 
         return positions;
     }
-    public static List<Token> GetTokens(List<string> input, List<Position> positions)
+    public static List<Token> GetTokens(List<string> inputLine, List<Position> positions, ref Dictionary<string, object> values)
     {
         List<Token> tokens = new List<Token>();
-        for(int i = 0, j = 0; i < input.Count; i++)
+        for (int i = 0, j = 0; i < inputLine.Count; i++)
         {
-            string s = input[i];
-            Position start = positions[j];
-            Position end = positions[j + 1];
-            j += 2;
-
-            TokenType token;
-            try
-            {
-                token = TokenTypes[s];
-            }
-            catch(Exception e)
-            {
-                if (s[0] == '{' && s[s.Length - 1] == '}')
-                    token = TokenType.BlockCode;
-                else
-                    token = TokenType.Unknown;
-            }
-
+            // Инициализация всех составляющаъ объекта Token
+            string str = inputLine[i];
+            Token token;
+            TokenType type;
             object value;
-            if (token == TokenType.Int)
-                value = Convert.ToInt32(s);
-            else
-                value = s;
+            Position start = positions[j++];
+            Position end = positions[j++];
 
-            tokens.Add(new Token(token, value, start, end));
+            // Одно из зарезервированных типов
+            if (TokenTypes.ContainsKey(str))
+            {
+                type = TokenTypes[str];
+                value = str;
+            }
+            else
+            {
+                // Значение
+                if (ValueType(str) == TokenType.Int)
+                {
+                    type = ValueType(str);
+                    value = int.Parse(str);
+                }
+                // Имя переменной (инициализация или использование)
+                else if (values.ContainsKey(str))
+                {
+                    type = TokenType.Name;
+                    value = str;
+                }
+                else if (i + 1 < inputLine.Count && TokenTypes[inputLine[i + 1]] == TokenType.Assignment)
+                {
+                    type = TokenType.Name;
+                    value = str;
+
+                    values.Add(str, null);
+                }
+                else
+                {
+                    type = TokenType.Unknown;
+                    value = str;
+                }
+            }
+            token = new Token(type, value, start, end);
+            tokens.Add(token);
         }
         return tokens;
     }
