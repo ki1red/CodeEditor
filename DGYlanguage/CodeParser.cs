@@ -14,7 +14,7 @@
     {
         Lines = Utils.SplitTextIntoLines(Text);
         if ((Utils.CheckParens('{', '}', Lines).Count > 0) || (Utils.CheckParens('(', ')', Lines).Count > 0))
-            Result = "eror parens";
+            Result = "error parens";
         else
         {
             List<List<string>> stringer = new List<List<string>>();
@@ -25,6 +25,7 @@
                 List<Position> positions = Utils.GetPositionsWords(Lines[c], (uint)c);
                 stringer[c] = Utils.SplitTextIntoWords(Lines[c]);
                 List<Token> tokens = Utils.GetTokens(stringer[c], positions, ref values);
+                MathUtils.Calculate(tokens, ref values);
                 c++;
             }
         }
