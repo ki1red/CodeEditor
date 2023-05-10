@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D5965CF-D0CB-4A3E-9CDD-44B15DD97A34}</ProjectGuid>
+    <ProjectGuid>{E659A65B-6D78-4F40-962D-8529428CB423}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CodeEditor</RootNamespace>
-    <AssemblyName>CodeEditor</AssemblyName>
+    <RootNamespace>Lab_1</RootNamespace>
+    <AssemblyName>Lab 1</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

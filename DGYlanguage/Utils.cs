@@ -1,6 +1,14 @@
 ﻿using System.Text;
 public static class Utils
 {
+    public static readonly HashSet<string> banWords = new HashSet<string>()
+    {
+        {"@"},{"!"},{"$"}
+    };
+    public static readonly HashSet<string> allowedWords = new HashSet<string>()
+    {
+        {"@\""},{"!="},{"$\"."}
+    };
     public static readonly Dictionary<string, TokenType> TokenTypes = new Dictionary<string, TokenType>
     {
         {"+", TokenType.Plus},
