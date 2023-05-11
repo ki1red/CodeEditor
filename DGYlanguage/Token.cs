@@ -8,6 +8,11 @@
     Division,               // оператор деления (/)
     Modulo,                 // оператор модуля (%)
     Assignment,             // оператор присваивания (=)
+    More,
+    Less,
+    Euqlse,
+    EuqlseAndMore,
+    EuqlseAndLess,
     LeftParen,              // (
     RightParen,             // )
     CompoundAddition,       // составной оператор сложения (+=)
@@ -20,7 +25,8 @@
     ElseKeyword,            // ключевое слово else
     LeftBlockCode,          // {
     RightBlockCode,         // }
-    Unknown
+    Unknown,
+    NotEuqlse
 }
 
 public struct Token
