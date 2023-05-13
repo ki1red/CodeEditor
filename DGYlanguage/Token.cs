@@ -39,6 +39,6 @@ public struct Token
 
     public override string ToString()
     {
-        return $"{Type} - {Value} - с {StartPosition} по {EndPosition} символ";
+        return $"{Type} - {Value} - from {StartPosition} to {EndPosition} symbols";
     }
 }
