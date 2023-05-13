@@ -1,6 +1,6 @@
 ﻿public enum TokenType
 {
-    Name,
+    Identifier,
     Int,                    // тип данных int
     Plus,                   // оператор сложения (+)
     Minus,                  // оператор вычитания (-)
@@ -15,27 +15,30 @@
     CompoundMultiplication, // составной оператор умножения (*=)
     CompoundDivision,       // составной оператор деления (/=)
     CompoundModulo,         // составной оператор модуля (%=)
-    MultiLineComment,       // многострочный комментарий (/* */)
-    IfKeyword,              // ключевое слово if
-    ElseKeyword,            // ключевое слово else
-    LeftBlockCode,          // {
-    RightBlockCode,         // }
+    MultiLineCommentStart,
+    MultiLineCommentEnd,
+    WhiteSpace,
+    EndOfStatement,
     Unknown
 }
 
 public struct Token
 {
-    public TokenType Type { get; private set; }
-    public object Value { get; private set; }
-    public Position PositionStart { get; private set; }
-    public Position PositionEnd { get; private set; }
-    public Token(TokenType type, object value, Position positionStart, Position positionEnd)
+    public TokenType Type { get; set; }
+    public string Value { get; set; }
+    public int StartPosition { get; set; }
+    public int EndPosition { get; set; }
+
+    public Token(TokenType type, string value, int startPosition)
     {
         Type = type;
         Value = value;
-        PositionStart = positionStart;
-        PositionEnd = positionEnd;
+        StartPosition = startPosition;
+        EndPosition = startPosition + value.Length - 1;
     }
-    public static bool operator ==(Token a, Token b) => (a.Type == b.Type && a.Value == b.Value);
-    public static bool operator !=(Token a, Token b) => !(a == b);
+
+    public override string ToString()
+    {
+        return $"{Type} - {Value} - с {StartPosition} по {EndPosition} символ";
+    }
 }
