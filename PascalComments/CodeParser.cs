@@ -1,12 +1,5 @@
 ﻿public class CodeParser
 {
-    enum Type
-    {
-        Letters,
-        CompleteLine,
-        PartialLine,
-        MultipleLines
-    }
     public string Text { get; private set; }
     public List<string> Errors { get; private set; }
     public List<string> Completes { get; private set; }
@@ -21,7 +14,6 @@
     {
         int index = 0;
         int startPosition = index;
-
         do
         {
             startPosition = index;
@@ -31,25 +23,24 @@
                 int toN = Whiler(index, '\n');
                 int toR = Whiler(index, '\r');
                 int toParen = Whiler(index, '}');
-
                 if (toParen == -1)
                 {
-                    Errors.Add($"Error: {Type.PartialLine} from {startPosition}");
+                    Errors.Add($"Error: Unfinished single-line comment at {startPosition}");
                     index++;
                 }
                 else if (toN != -1 && toParen > toN)
                 {
-                    Errors.Add($"Error: {Type.PartialLine} from {startPosition} to {toN-1}");
+                    Errors.Add($"Error: Unfinished single-line comment from {startPosition} to the end of the line");
                     index = toN + 1;
                 }
                 else if (toR != -1 && toParen > toR)
                 {
-                    Errors.Add($"Error: {Type.PartialLine} from {startPosition} to {toR-1}");
+                    Errors.Add($"Error: Unfinished single-line comment from {startPosition} to the end of the line");
                     index = toR + 1;
                 }
                 else
                 {
-                    Completes.Add($"Complete: {Type.PartialLine} from {startPosition} to {toParen}");
+                    Completes.Add($"Complete: Finished single-line comment from {startPosition} to {toParen}");
                     index = toParen + 1;
                 }
             }
@@ -57,17 +48,15 @@
             {
                 int toN = Whiler(index, '\n');
                 int toR = Whiler(index, '\r');
-
                 int result = (toN > toR) ? toN : toR;
-
                 if (result != -1)
                 {
-                    Completes.Add($"Complete: {Type.CompleteLine} from {startPosition} to {result - 1}");
+                    Completes.Add($"Complete: Finished single-line comment from {startPosition} to the end of the line");
                     index = result;
                 }
                 else
                 {
-                    Completes.Add($"Complete: {Type.CompleteLine} from {startPosition} to {Text.Length - 1}");
+                    Completes.Add($"Complete: Finished single-line comment from {startPosition} to the end of the line");
                     index = Text.Length;
                 }
             }
@@ -75,11 +64,10 @@
             {
                 if (index + 2 >= Text.Length)
                 {
-                    Errors.Add($"Error: {Type.MultipleLines} from {startPosition}");
-                    index+=2;
+                    Errors.Add($"Error: Unfinished multi-line comment at {startPosition}");
+                    index +=2;
                     continue;
                 }
-
                 int toParen = index+2;
                 do
                 {
@@ -88,23 +76,17 @@
 
                 if (toParen != -1)
                 {
-                    Completes.Add($"Complete: {Type.MultipleLines} from {startPosition} to {toParen}");
+                    Completes.Add($"Complete: Unfinished multi-line comment at {startPosition} to {toParen}");
                     index = toParen + 1;
                 }
                 else
                 {
-                    Errors.Add($"Error: {Type.MultipleLines} from {startPosition}");
-                    index+=2;
+                    Errors.Add($"Error: Unfinished multi-line comment at {startPosition}");
+                    index +=2;
                 }
             }
             else
             {
-                //if (cur == '\r' || cur == '\n')
-                //{
-                //   index++;
-                //    continue;
-                //}
-
                 int toMulti = index;
                 do
                 {
@@ -125,12 +107,7 @@
                     min = (toMulti != -1 && toMulti < min) ? toMulti : min;
                 }
                 index = min;
-
-                //while (Text[min] == '\r' || Text[min] == '\n')
-                //   min--;
-
-                Errors.Add($"Error: {Type.Letters} from {startPosition} to {min-1}");
-
+                Errors.Add($"Error: Unrecognized characters from {startPosition} to {min - 1}");
             }
         } while (index < Text.Length);
     }
