@@ -1,33 +1,77 @@
-﻿public class CodeParser
+﻿using System.Text.RegularExpressions;
+
+public class CodeParser
 {
-    private Dictionary<string, object> values = new Dictionary<string, object>();
+    private static readonly (string pattern, TokenType type)[] tokenDefinitions =
+    {
+        (@"\bint\b", TokenType.Int),
+        (@"\b[^\d]\w*\b", TokenType.Identifier),
+        (@"\+", TokenType.Plus),
+        (@"-", TokenType.Minus),
+        (@"\*", TokenType.Multiplication),
+        (@"\/", TokenType.Division),
+        (@"%", TokenType.Modulo),
+        (@"=", TokenType.Assignment),
+        (@"\(", TokenType.LeftParen),
+        (@"\)", TokenType.RightParen),
+        (@"\+=", TokenType.CompoundAddition),
+        (@"-=", TokenType.CompoundSubtraction),
+        (@"\*=", TokenType.CompoundMultiplication),
+        (@"\/=", TokenType.CompoundDivision),
+        (@"%=", TokenType.CompoundModulo),
+        (@"\/\*", TokenType.MultiLineCommentStart),
+        (@"\*\/", TokenType.MultiLineCommentEnd),
+        (@"\s", TokenType.WhiteSpace),
+        (@";", TokenType.EndOfStatement),
+        (@"\d+", TokenType.Unknown),
+        (@"\w+", TokenType.Unknown),
+    };
     public string Text { get; private set; }
-    public List<string> Lines { get; private set; }
-    public string Result { get; private set; }
     public CodeParser(string file)
     {
         Text = File.ReadAllText(file);
-        Lines = new List<string>();
-        Result = "";
     }
-    public void Analize()
+    public static List<Token> Parse(string code)
     {
-        Lines = Utils.SplitTextIntoLines(Text);
-        if ((Utils.CheckParens('{', '}', Lines).Count > 0) || (Utils.CheckParens('(', ')', Lines).Count > 0))
-            Result = "error parens";
-        else
+        var tokens = new List<Token>();
+        var inCommentMode = false;
+        var currentPos = 0;
+
+        while (code.Length > 0)
         {
-            List<List<string>> stringer = new List<List<string>>();
-            int c = 0;
-            while (c < Lines.Count)
+            var match = tokenDefinitions
+                .Select(d => Regex.Match(code, $"^{d.pattern}"))
+                .Where(m => m.Success)
+                .OrderByDescending(m => m.Value.Length)
+                .FirstOrDefault();
+
+            if (match != null)
             {
-                stringer.Add(new List<string>());
-                List<Position> positions = Utils.GetPositionsWords(Lines[c], (uint)c);
-                stringer[c] = Utils.SplitTextIntoWords(Lines[c]);
-                List<Token> tokens = Utils.GetTokens(stringer[c], positions, ref values);
-                MathUtils.Calculate(tokens, ref values);
-                c++;
+                var tokenType = tokenDefinitions.First(d => Regex.Match(match.Value, $"^{d.pattern}$").Success).type;
+
+                if (tokenType == TokenType.MultiLineCommentStart)
+                {
+                    inCommentMode = true;
+                }
+
+                if (!inCommentMode)
+                {
+                    tokens.Add(new Token(tokenType, match.Value, currentPos + 1));
+                }
+
+                if (tokenType == TokenType.MultiLineCommentEnd)
+                {
+                    inCommentMode = false;
+                }
+
+                currentPos += match.Value.Length;
+                code = code.Substring(match.Value.Length);
+            }
+            else
+            {
+                throw new Exception($"Unrecognized symbol '{code[0]}'");
             }
         }
+        return tokens;
     }
 }

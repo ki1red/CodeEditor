@@ -122,9 +122,6 @@ namespace Lab_1
         }
         private void InitializeTabEdit()
         {
-            //if (commanderActions == null)
-            //    throw new Exception("Commander isn't init"); 
-
             void MENUITEM_UndoAction_Click(object sender, RoutedEventArgs e)
             {
                 commanderActions.UndoActions();
@@ -270,8 +267,6 @@ namespace Lab_1
                     isFileSaved = false;
                     e.Handled = true;
                 }
-
-                //connector.UpdateTextCode(TEXTBOX_WindowCodeEditor.Text);
             }
 
             TEXTBOX_WindowCodeEditor.PreviewKeyDown += TEXTBOX_WindowCodeEditor_PreviewKeyDown;
@@ -308,9 +303,9 @@ namespace Lab_1
          
         public void Run()
         {
-            connector.UpdateTextCode(TEXTBOX_WindowCodeEditor.Text);
+            IsCurrentFileSaved();
 
-            TEXTBOX_WindowOutputerInformation.Text = connector.GetResultCompileCode();
+            TEXTBOX_WindowOutputerInformation.Text = connector.GetResultCompileCode($"{FileWorker.initialDirectory}\\{FileWorker.nameFile}.{FileWorker.defaultExt}");
         }
 
     }

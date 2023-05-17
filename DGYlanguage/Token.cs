@@ -1,6 +1,6 @@
 ﻿public enum TokenType
 {
-    Name,
+    Identifier,
     Int,                    // тип данных int
     Plus,                   // оператор сложения (+)
     Minus,                  // оператор вычитания (-)
@@ -8,11 +8,6 @@
     Division,               // оператор деления (/)
     Modulo,                 // оператор модуля (%)
     Assignment,             // оператор присваивания (=)
-    More,
-    Less,
-    Euqlse,
-    EuqlseAndMore,
-    EuqlseAndLess,
     LeftParen,              // (
     RightParen,             // )
     CompoundAddition,       // составной оператор сложения (+=)
@@ -20,28 +15,30 @@
     CompoundMultiplication, // составной оператор умножения (*=)
     CompoundDivision,       // составной оператор деления (/=)
     CompoundModulo,         // составной оператор модуля (%=)
-    MultiLineComment,       // многострочный комментарий (/* */)
-    IfKeyword,              // ключевое слово if
-    ElseKeyword,            // ключевое слово else
-    LeftBlockCode,          // {
-    RightBlockCode,         // }
-    Unknown,
-    NotEuqlse
+    MultiLineCommentStart,
+    MultiLineCommentEnd,
+    WhiteSpace,
+    EndOfStatement,
+    Unknown
 }
 
 public struct Token
 {
-    public TokenType Type { get; private set; }
-    public object Value { get; private set; }
-    public Position PositionStart { get; private set; }
-    public Position PositionEnd { get; private set; }
-    public Token(TokenType type, object value, Position positionStart, Position positionEnd)
+    public TokenType Type { get; set; }
+    public string Value { get; set; }
+    public int StartPosition { get; set; }
+    public int EndPosition { get; set; }
+
+    public Token(TokenType type, string value, int startPosition)
     {
         Type = type;
         Value = value;
-        PositionStart = positionStart;
-        PositionEnd = positionEnd;
+        StartPosition = startPosition;
+        EndPosition = startPosition + value.Length - 1;
     }
-    public static bool operator ==(Token a, Token b) => (a.Type == b.Type && a.Value == b.Value);
-    public static bool operator !=(Token a, Token b) => !(a == b);
+
+    public override string ToString()
+    {
+        return $"{Type} - {Value} - from {StartPosition} to {EndPosition} symbols";
+    }
 }

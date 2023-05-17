@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Shapes;
-using Lab_1.ViewInterfaces;
 using Microsoft.Win32;
 
 namespace Lab_1.AuxiliaryClasses
@@ -15,7 +10,8 @@ namespace Lab_1.AuxiliaryClasses
     {
         public static string initialDirectory { get; private set; } = null;
         public static string nameFile { get; private set; } = null;
-        public static string defaultExt { get; private set; } = null;
+        public static string defaultExt { get; private set; } = "txt";
+        public static string filter { get; private set; } = "TXT|*.txt";
         public static string fileContents { get; private set; } = null;
 
         public static bool CreateFile()
@@ -110,6 +106,7 @@ namespace Lab_1.AuxiliaryClasses
             window.InitialDirectory = initialDirectory;
             window.FileName = nameFile;
             window.DefaultExt = defaultExt;
+            window.Filter = filter;
         }
         private static void GetSettingsWindow(FileDialog window)
         {

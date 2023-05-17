@@ -57,7 +57,6 @@
     </ApplicationDefinition>
     <Compile Include="AuxiliaryClasses\CommanderActionsForCode.cs" />
     <Compile Include="AuxiliaryClasses\FileWorker.cs" />
-    <Compile Include="LanguageConnect\ICaller.cs" />
     <Compile Include="LanguageConnect\LanguageConnector.cs" />
     <Compile Include="TextInMomentTime.cs" />
     <Compile Include="ViewInterfaces\IActionsOnCode.cs" />

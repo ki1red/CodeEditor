@@ -9,9 +9,13 @@ else if (args[0] == "-c")
     try
     {
         CodeParser codeParser = new CodeParser(args[1]);
-        var tokens = CodeParser.Parse(codeParser.Text);
+        codeParser.Parse();
 
-        foreach (var token in tokens)
+        foreach (var token in codeParser.Errors)
+        {
+            Console.WriteLine(token);
+        }
+        foreach (var token in codeParser.Completes)
         {
             Console.WriteLine(token);
         }
