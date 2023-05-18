@@ -38,7 +38,7 @@ namespace Lab_1
             InitializeTabHelp();
             InitializeTabRun();
 
-            connector = new LanguageConnector("C:\\Users\\druzh\\source\\repos\\CodeEditor\\PascalComments\\bin\\Debug\\net6.0\\PascalComments.exe");
+            connector = new LanguageConnector("Pascal\\PascalComments.exe");
         }
 
         private void InitializeTabFile()

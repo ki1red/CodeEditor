@@ -76,7 +76,7 @@
 
                 if (toParen != -1)
                 {
-                    Completes.Add($"Complete: Unfinished multi-line comment at {startPosition} to {toParen}");
+                    Completes.Add($"Complete: Finished multi-line comment at {startPosition} to {toParen}");
                     index = toParen + 1;
                 }
                 else
