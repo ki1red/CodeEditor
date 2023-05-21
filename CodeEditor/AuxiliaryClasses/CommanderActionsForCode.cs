@@ -146,11 +146,11 @@
 //    }
 
 //}
-using Lab_1.ViewInterfaces;
+using CodeEditor.ViewInterfaces;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
-namespace Lab_1.AuxiliaryClasses
+namespace CodeEditor.AuxiliaryClasses
 {
     public class CommanderActionsForCode : IActionsOnCode, IActionsOnStack
     {

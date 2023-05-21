@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32922.545
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeEditor", "CodeEditor\CodeEditor.csproj", "{E659A65B-6D78-4F40-962D-8529428CB423}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PascalComments", "PascalComments\PascalComments.csproj", "{C9F478E9-8F80-41AB-9E85-8EE8D397C753}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DGYlanguage", "DGYlanguage\DGYlanguage.csproj", "{6FA2AB0F-AC26-4C2A-B7C1-636DD977B1E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{E659A65B-6D78-4F40-962D-8529428CB423}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E659A65B-6D78-4F40-962D-8529428CB423}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E659A65B-6D78-4F40-962D-8529428CB423}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9F478E9-8F80-41AB-9E85-8EE8D397C753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F478E9-8F80-41AB-9E85-8EE8D397C753}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F478E9-8F80-41AB-9E85-8EE8D397C753}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F478E9-8F80-41AB-9E85-8EE8D397C753}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FA2AB0F-AC26-4C2A-B7C1-636DD977B1E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA2AB0F-AC26-4C2A-B7C1-636DD977B1E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA2AB0F-AC26-4C2A-B7C1-636DD977B1E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA2AB0F-AC26-4C2A-B7C1-636DD977B1E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab_1.ViewInterfaces
+namespace CodeEditor.ViewInterfaces
 {
     internal interface IActionsOnStack
     {

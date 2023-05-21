@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Windows.Media;
 using System.IO;
 
-namespace Lab_1.LanguageConnect
+namespace CodeEditor.LanguageConnect
 {
     internal class LanguageConnector
     {

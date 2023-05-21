@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using Microsoft.Win32;
 
-namespace Lab_1.AuxiliaryClasses
+namespace CodeEditor.AuxiliaryClasses
 {
     internal static class FileWorker
     {

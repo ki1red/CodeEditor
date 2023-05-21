@@ -1,4 +1,9 @@
-﻿public class CodeParser
+﻿
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+public class CodeParser
 {
     public string Text { get; private set; }
     public List<string> Errors { get; private set; }

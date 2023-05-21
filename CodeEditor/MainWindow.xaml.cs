@@ -1,25 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Lab_1.ViewInterfaces;
-using Lab_1;
-using Lab_1.AuxiliaryClasses;
+﻿using System.Windows;
 using System.Diagnostics;
-using System.Security.Policy;
-using Lab_1.LanguageConnect;
+using System.Windows.Input;
+using CodeEditor.ViewInterfaces;
+using CodeEditor.AuxiliaryClasses;
+using CodeEditor.LanguageConnect;
+using System;
 
-namespace Lab_1
+namespace CodeEditor
 {
     public partial class MainWindow : Window, IRunable
     {
@@ -35,6 +22,8 @@ namespace Lab_1
             InitializeTabEdit();
             InitializeKeysInCodeEditor();
             InitializeTabFile();
+            InitializeTabView();
+            InitializeTabText();
             InitializeTabHelp();
             InitializeTabRun();
 
@@ -176,6 +165,87 @@ namespace Lab_1
 
             MENUITEM_SelectAllText.Click += MENUITEM_SelectAllText_Click;
         }
+        private void InitializeTabView()
+        {
+            void MENUITEM_IncreaseFontInput_Click(object sender, RoutedEventArgs e)
+            {
+                TEXTBOX_WindowCodeEditor.FontSize += 10;
+            }
+
+            MENUITEM_IncreaseFontInput.Click += MENUITEM_IncreaseFontInput_Click;
+
+            void MENUITEM_IncreaseFontOutput_Click(object sender, RoutedEventArgs e)
+            {
+                TEXTBOX_WindowOutputerInformation.FontSize += 10;
+            }
+
+            MENUITEM_IncreaseFontOutput.Click += MENUITEM_IncreaseFontOutput_Click;
+
+            void MENUITEM_DecreaseFontInput_Click(object sender, RoutedEventArgs e)
+            {
+                TEXTBOX_WindowCodeEditor.FontSize -= 10;
+            }
+
+            MENUITEM_DecreaseFontInput.Click += MENUITEM_DecreaseFontInput_Click;
+
+            void MENUITEM_DecreaseFontOutput_Click(object sender, RoutedEventArgs e)
+            {
+                TEXTBOX_WindowOutputerInformation.FontSize -= 10;
+            }
+
+            MENUITEM_DecreaseFontOutput.Click += MENUITEM_DecreaseFontOutput_Click;
+        }
+        private void InitializeTabText()
+        {
+            void MENUITEM_ProblemStatement_Click(object sender, RoutedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "/info/problem_statement.html");
+            }
+            MENUITEM_ProblemStatement.Click += MENUITEM_ProblemStatement_Click;
+
+            void MENUITEM_Grammar_Click(object sender, RoutedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "/info/grammar.html");
+            }
+            MENUITEM_Grammar.Click += MENUITEM_Grammar_Click;
+
+            void MENUITEM_GrammarClassification_Click(object sender, RoutedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "/info/grammar_classification.html");
+            }
+            MENUITEM_GrammarClassification.Click += MENUITEM_GrammarClassification_Click;
+
+            void MENUITEM_AnalizeMethod_Click(object sender, RoutedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "/info/analize_method.html");
+            }
+            MENUITEM_AnalizeMethod.Click += MENUITEM_AnalizeMethod_Click;
+
+            void MENUITEM_Diagnostic_Click(object sender, RoutedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "/info/diagnostics_and_neutralizations.html");
+            }
+            MENUITEM_Diagnostic.Click += MENUITEM_Diagnostic_Click;
+
+            void MENUITEM_TestExample_Click(object sender, RoutedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "/info/test_example.html");
+            }
+            MENUITEM_TestExample.Click += MENUITEM_TestExample_Click;
+
+            void MENUITEM_Bibliography_Click(object sender, RoutedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "/info/bibliography.html");
+            }
+            MENUITEM_Bibliography.Click += MENUITEM_Bibliography_Click;
+
+            void MENUITEM_SourceCode_Click(object sender, RoutedEventArgs e)
+            {
+                System.Diagnostics.Process.Start(Environment.CurrentDirectory + "/info/source_code.html");
+            }
+            MENUITEM_SourceCode.Click += MENUITEM_SourceCode_Click;
+        }
+
         private void InitializeTabHelp()
         {
             void MENUITEM_Help_Click(object sender, RoutedEventArgs e)

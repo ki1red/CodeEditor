@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace Lab_1.ViewInterfaces
+namespace CodeEditor.ViewInterfaces
 {
     internal interface IActionsOnCode
     {
