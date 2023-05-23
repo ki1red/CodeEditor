@@ -34,9 +34,9 @@
     }
     private static List<Token> Tokenize(string input)
     {
-        List<Token> tokens = new List<Token>(); // Список для хранения лексем
-        int i = 0; // Индекс текущего символа
-        int line = 1; //Номер текущей строки
+        List<Token> tokens = new List<Token>();
+        int i = 0;
+        int line = 1;
 
         while (i < input.Length)
         {
@@ -133,7 +133,7 @@
                 {
                     tokens.Add(new Token(line, (int)TokenType.Int, TokenType.Int, word, start + 1, i));
                 }
-                else // Иначе это идентификатор
+                else
                 {
                     tokens.Add(new Token(line, (int)TokenType.Identifier, TokenType.Identifier, word, start + 1, i));
                 }
@@ -162,7 +162,19 @@
                 continue;
             }
 
-            // Недопустимый символ - добавляем лексему в список
+            if (c == '(')
+            {
+                tokens.Add(new Token(line, (int)TokenType.LeftParen, TokenType.LeftParen, "(", i + 1, i + 1));
+                i++;
+                continue;
+            }
+            else if (c == ')')
+            {
+                tokens.Add(new Token(line, (int)TokenType.RightParen, TokenType.RightParen, ")", i + 1, i + 1));
+                i++;
+                continue;
+            }
+
             tokens.Add(new Token(line, (int)TokenType.Unknown, TokenType.Unknown, c.ToString(), i + 1, i + 1));
             i++;
         }
