@@ -27,7 +27,7 @@ namespace CodeEditor
             InitializeTabHelp();
             InitializeTabRun();
 
-            connector = new LanguageConnector("Pascal\\PascalComments.exe");
+            connector = new LanguageConnector("C:\\Users\\druzh\\source\\repos\\CodeEditor\\DGYlanguage\\bin\\Debug\\net6.0\\DGYlanguage.exe");
         }
 
         private void InitializeTabFile()
@@ -375,7 +375,7 @@ namespace CodeEditor
         {
             IsCurrentFileSaved();
 
-            TEXTBOX_WindowOutputerInformation.Text = connector.GetResultCompileCode($"{FileWorker.initialDirectory}\\{FileWorker.nameFile}.{FileWorker.defaultExt}");
+            TEXTBOX_WindowOutputerInformation.Text = connector.GetResultCompileCode($"{FileWorker.initialDirectory}{FileWorker.nameFile}.{FileWorker.defaultExt}");
         }
 
     }

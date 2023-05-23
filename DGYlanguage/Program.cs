@@ -9,11 +9,11 @@ else if (args[0] == "-c")
     try
     {
         CodeParser codeParser = new CodeParser(args[1]);
-        var tokens = CodeParser.Parse(codeParser.Text);
+        var tokens = codeParser.Parse();
 
         foreach (var token in tokens)
         {
-            Console.WriteLine(token);
+            Console.WriteLine(token.ToString());
         }
     }
     catch (Exception ex)

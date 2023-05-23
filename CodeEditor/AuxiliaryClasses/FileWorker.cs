@@ -110,9 +110,10 @@ namespace CodeEditor.AuxiliaryClasses
         }
         private static void GetSettingsWindow(FileDialog window)
         {
-            initialDirectory = window.InitialDirectory;
-
+            initialDirectory = "";
             string[] fullPathToFile = window.FileName.Split('\\');
+            for (int i = 0; i + 1 < fullPathToFile.Length; i++)
+                initialDirectory += fullPathToFile[i] + "\\";
 
             int lastIndex = fullPathToFile.Length - 1;
             string lastElement = fullPathToFile[lastIndex];
