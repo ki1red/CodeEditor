@@ -27,7 +27,7 @@ namespace CodeEditor
             InitializeTabHelp();
             InitializeTabRun();
 
-            connector = new LanguageConnector("C:\\Users\\druzh\\source\\repos\\CodeEditor\\DGYlanguage\\bin\\Debug\\net6.0\\DGYlanguage.exe");
+            connector = new LanguageConnector("Pascal\\PascalComments.exe");
         }
 
         private void InitializeTabFile()
